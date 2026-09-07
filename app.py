@@ -24,7 +24,7 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-API_KEY = 'uMA9lRxrRP6JvAKbQRS127yAmMEjb6xDaJK0FwqG'
+GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
 PDF_PATH = 'ArasDocs'
 PERSIST_DIR = 'Aras_Database'
 CHAT_STORE_FILE = "chat_history.json"
@@ -158,7 +158,7 @@ vectorstore = get_vectorstore()
 retriever = vectorstore.as_retriever(search_kwargs={'k': 5})
 
 # Initialize LLM
-llm = ChatGroq(model="llama-3.1-8b-instant")
+llm = ChatGroq(model="llama-3.1-8b-instant", api_key=GROQ_API_KEY)
 
 def get_session_history(session_id: str) -> BaseChatMessageHistory:
     """Retrieve or create chat history for a session."""
